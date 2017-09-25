@@ -64,6 +64,8 @@ public class NewJungPostActivity extends BaseActivity2 {
         final String title = mTitleField.getText().toString();
         final String body = mBodyField.getText().toString();
         final String categoryText = mCategory.getSelectedItem().toString();
+        final int clubId = S.club_id;
+
         // Title is required
         if (TextUtils.isEmpty(title)) {
             mTitleField.setError(REQUIRED);
@@ -82,6 +84,7 @@ public class NewJungPostActivity extends BaseActivity2 {
 
         // [START single_value_read]
         final String userId = getUid();
+        Log.d("세빈2",userId);
         mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -132,14 +135,26 @@ public class NewJungPostActivity extends BaseActivity2 {
     private void writeNewPost(String userId, String username, String title, String body, String category) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
-        String key = mDatabase.child("jung_posts").push().getKey();
+        String key = mDatabase.child("/"+S.club_id+"/").getKey();
+        String keyTest = mDatabase.child("/"+S.club_id+"/").push().getKey();
+        S.distinctJung = keyTest;
+        Log.d("ㅂㅈㄷㅂㅈㄷ",keyTest);
         JungPost post = new JungPost(userId, username, title, body, category);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/jung_posts/" + key, postValues);
-        childUpdates.put("/jung_user-posts/" + userId + "/" + key, postValues);
+        childUpdates.put("/jung_posts/" + key+ "/"+S.distinctJung +"/", postValues);
+        childUpdates.put("/jung_user-posts/" + userId + "/"+S.distinctJung +"/" + key, postValues);
 
+        /*
+        *  String key = mDatabase.child("plaza_posts").push().getKey();
+        Post post = new Post(userId, username, title, body);
+        Map<String, Object> postValues = post.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/plaza_posts/" + key, postValues);
+        childUpdates.put("/plaza_user-posts/" + userId + "/" + key, postValues);
+        * */
         mDatabase.updateChildren(childUpdates);
     }
     // [END write_fan_out]

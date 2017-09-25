@@ -134,7 +134,7 @@ public class MyJungdangFragment_SearchJungdang extends Fragment {
                                 else {
 
                                     mDatabase.child("users").child(GetUserId.getUid()).child("club").setValue(Integer.parseInt(postRef.getKey()));
-                                    mDatabase.addValueEventListener(new ValueEventListener() {
+                                    mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot) {
                                             partisian = dataSnapshot.child("club").child(postRef.getKey()).child("partisian").getValue(int.class);
@@ -142,17 +142,10 @@ public class MyJungdangFragment_SearchJungdang extends Fragment {
                                             mDatabase.child("club").child(postRef.getKey()).child("partisian").setValue((partisian+1));
                                             Toast.makeText(getActivity(), "이미 가입된dsa다!"+partisian,Toast.LENGTH_SHORT).show();
                                         }
-
                                         @Override
                                         public void onCancelled(DatabaseError databaseError) {
-
                                         }
-
                                     });
-
-                                    if (partisian != 0){
-
-                                    }
 
                                 }
                             }

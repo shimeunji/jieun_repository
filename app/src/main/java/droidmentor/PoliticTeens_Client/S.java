@@ -18,6 +18,7 @@ public class S {
     public static int just_level=1;
     public static int partisian=1;
     public static int id;
+    public static String distinctJung;
 
     public S()
     {

@@ -34,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import droidmentor.PoliticTeens_Client.GetUserId;
 import droidmentor.PoliticTeens_Client.JungPostDetailActivity;
 import droidmentor.PoliticTeens_Client.R;
+import droidmentor.PoliticTeens_Client.S;
 import droidmentor.PoliticTeens_Client.models.JungPost;
 import droidmentor.PoliticTeens_Client.viewholder.JungPostViewHolder;
 
@@ -57,6 +58,8 @@ public class MyJungdangFragment extends Fragment {
     TextView mydang_people;
     TextView mydang_ideology;
 
+    String searchId=null;
+
     String user_club;
 
     public MyJungdangFragment() {
@@ -70,7 +73,7 @@ public class MyJungdangFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View rootView = inflater.inflate(R.layout.fragment_myjundangs, container, false);
 
-       // View view = inflater.inflate(R.layout.fragment_myjundangs, container, false);
+        // View view = inflater.inflate(R.layout.fragment_myjundangs, container, false);
 
         manager = (FragmentManager) getFragmentManager();
         // [START create_database_reference]
@@ -139,7 +142,7 @@ public class MyJungdangFragment extends Fragment {
                 JungPostViewHolder.class, postsQuery) {
             @Override
             protected void populateViewHolder(final JungPostViewHolder viewHolder, final JungPost model, final int position) {
-               final DatabaseReference postRef = getRef(position);
+                final DatabaseReference postRef = getRef(position);
                 // Set click listener for the whole post view
                 final String postKey = postRef.getKey();
 
@@ -165,8 +168,10 @@ public class MyJungdangFragment extends Fragment {
                     @Override
                     public void onClick(View starView) {
                         // Need to write to both places the post is stored
-                        DatabaseReference globalPostRef = mDatabase.child("jung_posts").child(postRef.getKey());
+                        DatabaseReference globalPostRef = mDatabase.child("jung_posts/").child(postRef.getKey());
+                        Log.d("log1",globalPostRef.toString());
                         DatabaseReference userPostRef = mDatabase.child("jung_user-posts").child(model.uid).child(postRef.getKey());
+                        Log.d("log2",userPostRef.toString());
                         // Run two transactions
                         onStarClicked(globalPostRef);
                         onStarClicked(userPostRef);
@@ -233,8 +238,7 @@ public class MyJungdangFragment extends Fragment {
         // [START recent_posts_query]
         // Last 100 posts, these are automatically the 100 most recent
         // due to sorting by push() keys
-
-        Query recentPostsQuery = databaseReference.child("jung_posts/")
+        Query recentPostsQuery = databaseReference.child("jung_posts/"+S.club_id)
                 .limitToFirst(100);
         // [END recent_posts_query]
 

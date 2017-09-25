@@ -16,6 +16,7 @@ public class JungPost {
     public String body;
     public String category;
     public int starCount = 0;
+    public int myClubID;
     public Map<String, Boolean> stars = new HashMap<>();
 
     public JungPost() {
@@ -41,6 +42,7 @@ public class JungPost {
         result.put("starCount", starCount);
         result.put("stars", stars);
         result.put("category", category);
+
 
         return result;
     }
