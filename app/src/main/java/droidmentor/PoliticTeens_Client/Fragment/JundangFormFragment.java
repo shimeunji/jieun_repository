@@ -27,7 +27,6 @@ import com.flask.colorpicker.OnColorChangedListener;
 import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,11 +35,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.greenfrvr.hashtagview.HashtagView;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import droidmentor.PoliticTeens_Client.GetUserId;
-import droidmentor.PoliticTeens_Client.Jundang;
+import droidmentor.PoliticTeens_Client.models.Jundang;
 import droidmentor.PoliticTeens_Client.R;
 import droidmentor.PoliticTeens_Client.S;
 

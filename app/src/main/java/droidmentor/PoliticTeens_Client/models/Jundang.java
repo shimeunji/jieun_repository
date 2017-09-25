@@ -1,4 +1,4 @@
-package droidmentor.PoliticTeens_Client;
+package droidmentor.PoliticTeens_Client.models;
 
 /**
  * Created by User on 2017-09-16.
@@ -10,7 +10,6 @@ import com.google.firebase.database.IgnoreExtraProperties;
 import java.util.HashMap;
 import java.util.Map;
 
-@IgnoreExtraProperties
 public class Jundang {
     public String just_name;
     public String just_person_name;

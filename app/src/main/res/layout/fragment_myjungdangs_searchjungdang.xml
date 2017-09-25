@@ -115,22 +115,13 @@
                 />
 
         </LinearLayout>
-        <com.greenfrvr.hashtagview.HashtagView
-            android:layout_below="@+id/search"
-            android:id="@+id/hashtags2"
-            style="@style/HashtagView"
-            app:rowMode="stretch"
-            app:selectionMode="true"
-            app:tagBackground="@drawable/item_bg_1"
-            app:tagTextColor="@color/colorText"
-            android:layout_margin="20dp"/>
         <ImageView
             android:layout_margin="20dp"
             android:layout_width="350dp"
             android:layout_height="1dp"
             android:layout_centerHorizontal="true"
             android:background="@color/colorText"
-            android:layout_below="@id/hashtags2"
+            android:layout_below="@id/search"
             android:id="@+id/seach_dang_bar"
             />
         <TextView
@@ -145,7 +136,9 @@
             android:text="HOT정당" />
 
         <android.support.v7.widget.RecyclerView
-            tools:listitem="@layout/myjungdang_search_item_post"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
+            tools:listitem="@layout/dang_item"
             android:layout_below="@id/hot_title"
             android:id="@+id/hot_jungdang"
             android:layout_width="match_parent"
